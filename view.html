@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/view.css">
+    <title>시리얼 번호</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <button type="button" class="export">엑셀로 내보내기</button>
+        <table class=" serialNumber-table" id="serialNumber">
+            <thead>
+                <tr>
+                    <th class="th-number">순번</th>
+                    <th class="th-serialNumber">시리얼번호</th>
+                </tr>
+            </thead>
+            <tbody class="serial-table-body">
+            </tbody>
+        </table>
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="./js/renderer.js"></script>
+    <script>
+        const body = document.querySelector('.serial-table-body')
+        let serialNumbers = [];
+        ipcRenderer.send('getGeneratedSerialNumbers')
+        ipcRenderer.on('getGeneratedSerialNumbers-reply', (event, arg) => {
+            serialNumbers = arg;
+            generateTable()
+        });
+
+        const generateTable = () => {
+            for (let i = 0; i < serialNumbers.length; i++) {
+                let row = `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>S/N : ${serialNumbers[i]}</td>
+                    </tr>
+                
+                `
+                body.innerHTML += row;
+            }
+
+        }
+    </script>
+
+    <script>
+        const exportBtn = document.querySelector('.export');
+        let title = {};
+
+        const setTitle = () => {
+            const date = new Date();
+            ipcRenderer.send('getFormData')
+            ipcRenderer.on('getFormData-reply', (event, arg) => {
+                title = `Grid10-CT ${arg.rotateType === `S` ? `소프트` : `포인트`}타입 ${date.getFullYear()}년${date.getMonth() + 1}월 ${date.getDate()}일 ${arg.startQuantity}~${arg.endQuantity} `
+                exportExcel()
+            })
+        }
+
+
+
+        function exportExcel() {
+
+            const Excel = require('exceljs');
+            const workbook = new Excel.Workbook();
+
+            console.log(title)
+
+            workbook.creator = 'bangbongbim';
+            workbook.lastModifiedBy = '';
+            workbook.created = new Date(2018, 6, 19);
+            workbook.modified = new Date();
+            workbook.lastPrinted = new Date(2016, 9, 27);
+
+            const sheet = workbook.addWorksheet('Sheets');
+
+            sheet.columns = [
+                { header: '순번', key: 'number' },
+                { header: '시리얼넘버', key: 'serialNumber' },
+            ]
+
+            for (let i = 0; i < serialNumbers.length; i++) {
+                sheet.addRow({ number: `${i + 1}`, serialNumber: `${serialNumbers[i]}` });
+            }
+
+            const filePath = (`../${title}.xls`)
+
+            workbook.xlsx.writeFile(filePath)
+
+        }
+
+        exportBtn.addEventListener('click', (event) => {
+            setTitle()
+        })
+    </script>
+
+
+</body>
+
+</html>

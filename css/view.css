@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 1024px;
+    min-height: 100vh;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.export {
+    margin-top: 20px;
+    width: 150px;
+    height: 70px;
+    font-size: 15px;
+    font-weight: bold;
+    font-size: 17px;
+    border: none;
+    border-radius: 10px;
+    color: #ffff;
+    font-weight: bold;
+    background-color: #000;
+}
+
+.title {
+    text-align: center;
+}
+
+.salt {
+    margin-top: 15px;
+}
+
+.serialNumber-table {
+    margin-top: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.th-salt {
+    width: 10%;
+}
+
+.th-number {
+    width: 10%;
+    font-size: 17px;
+}
+
+.th-serialNumber {
+    width: 40%;
+    font-size: 17px;
+
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+}

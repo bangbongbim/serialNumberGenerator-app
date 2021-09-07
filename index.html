@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Hello World!</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- <div class="loading-box">
+      <div class="loader loader--style3" title="2">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
+          xml:space="preserve">
+          <path fill="#000"
+            d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+            <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25"
+              dur="0.6s" repeatCount="indefinite" />
+          </path>
+        </svg>
+      </div>
+    </div> -->
+    <div class="contents">
+
+      <div class="year">
+        <p class="title">생산 년도 선택</p>
+        <select name="productionYear">
+          <option value="G">2020년 , 생산 코드: G
+          <option value="N">2021년 , 생산 코드: N
+          <option value="D">2022년 , 생산 코드: D
+          <option value="L">2023년 , 생산 코드: L
+          <option value="M">2024년 , 생산 코드: M
+          <option value="B">2025년 , 생산 코드: B
+          <option value="S">2026년 , 생산 코드: S
+          <option value="A">2027년 , 생산 코드: A
+          <option value="J">2028년 , 생산 코드: J
+          <option value="C">2029년 , 생산 코드: C
+          <option value="K">2030년 , 생산 코드: K
+          <option value="T">2031년 , 생산 코드: T
+          <option value="P">2032년 , 생산 코드: P
+          <option value="H">2033년 , 생산 코드: H
+        </select>
+      </div>
+
+      <div class="month">
+        <p class="title">생산 월 선택</p>
+        <select name="productionMonth">
+          <option value="1">1월 , 생산 코드: 1
+          <option value="2">2월 , 생산 코드: 2
+          <option value="3">3월 , 생산 코드: 3
+          <option value="4">4월 , 생산 코드: 4
+          <option value="5">5월 , 생산 코드: 5
+          <option value="6">6월 , 생산 코드: 6
+          <option value="7">7월 , 생산 코드: 7
+          <option value="8">8월 , 생산 코드: 8
+          <option value="9">9월 , 생산 코드: 9
+          <option value="A">10월 , 생산 코드: A
+          <option value="B">11월 , 생산 코드: B
+          <option value="C">12월 , 생산 코드: C
+        </select>
+      </div>
+
+      <div class="connection">
+        <p class="title">유/무선 선택</p>
+        <select name="connectionMethod">
+          <option value="C">유선 , 생산 코드: C
+          <option value="B">무선 , 생산 코드: B
+        </select>
+      </div>
+
+      <div class="type">
+        <p class="title">무하/무부하 선택</p>
+        <select name="rotateType">
+          <option value="S">소프트 , 생산 코드: S
+          <option value="P">포인터 , 생산 코드: P
+        </select>
+      </div>
+
+      <div class="quantity">
+        <p class="title">수량&nbsp; </p>
+        시작 : <input type="number" name="startQuantity">
+        끝 : <input type="number" name="endQuantity">
+        <button class="generate-btn">생성하기</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/functions.js"></script>
+  <script src="./js/generator.js"></script>
+</body>
+
+</html>

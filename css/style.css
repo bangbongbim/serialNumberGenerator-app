@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(45deg, #a0ebd8, #fed9ff, #c8ff00, #45c5f8, #f40303, #ed5efa);
+    animation: move_gradation 30s ease infinite;
+    background-size: 1200% 1200%;
+}
+.loading-box{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0 0 2em;
+    height: 100px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*
+  Set the color of the icon
+*/
+svg path,
+svg rect {
+    fill: #FF6700;
+}
+
+.contents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30),
+        0 15px 12px rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
+    max-width: 900px;
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+}
+
+.year,
+.month,
+.connection,
+.type,
+.quantity {
+    margin: 10px;
+    display: flex;
+}
+
+.title{
+    font-weight: bold;
+}
+
+select,input{
+    margin:0 10px;
+}
+
+.generate-btn{
+    width: 60px;
+    height: 25px;
+}
+
+@keyframes move_gradation {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 50% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}

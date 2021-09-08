@@ -4,11 +4,8 @@ const generateBtn = document.querySelector(".generate-btn");
 const selects = document.querySelectorAll("select");
 const inputs = document.querySelectorAll(".quantity input");
 
-const check = false;
 window.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    // document.querySelector(".loading-box").style.display = "block";
-
     generateEvent();
   }
 });
@@ -18,6 +15,7 @@ generateBtn.addEventListener("click", (event) => {
 });
 
 function generateEvent() {
+  document.querySelector(".loading-box").style.visibility = "visible";
   formData.productionYear = selects[0].value;
   formData.productionMonth = selects[1].value;
   formData.connectionMethod = selects[2].value;
@@ -26,11 +24,14 @@ function generateEvent() {
   formData.endQuantity = inputs[1].value;
 
   ipcRenderer.send("setFormData", formData);
-  ipcRenderer.send("setGenerateSerialNumbers", generatorSerialNumber(formData));
-  location.href = "view.html";
+
+  generatorSerialNumber(formData).then((encryptSerialNumber) => {
+    ipcRenderer.send("setGenerateSerialNumbers", encryptSerialNumber);
+    location.href = "view.html";
+  });
 }
 
-const generatorSerialNumber = (formData) => {
+const generatorSerialNumber = async (formData) => {
   const { productionYear, productionMonth, connectionMethod, rotateType, startQuantity, endQuantity } = formData;
   let encryptSerialNumber = new Array();
 
@@ -45,8 +46,7 @@ const generatorSerialNumber = (formData) => {
   const endNumber = parseInt(endQuantity);
 
   // ! 시리얼 번호 생성
-  encryptSerialNumber = getSerialNumber(startNumber, endNumber, static);
-
+  encryptSerialNumber = await getSerialNumbers(startNumber, endNumber, static);
   // ! 유선, 무선 모델이름 생성
   const modelName = getModelName(connectionMethod, rotateType);
 

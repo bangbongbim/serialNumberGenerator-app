@@ -1,27 +1,36 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^11.0.4"
-  },
-  "dependencies": {
-    "electron-reload": "^2.0.0-alpha.1",
-    "exceljs": "^4.3.0",
-    "xlsx": "^0.17.1"
-  }
+	"name": "serial-app",
+	"version": "1.0.0",
+	"description": "A minimal Electron application",
+	"main": "main.js",
+	"build": {
+		"appId": "bangbongbim",
+		"mac": {
+			"category": "serialNumber"
+		}
+	},
+	"scripts": {
+		"start": "electron .",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder"
+	},
+	"keywords": [
+		"Electron",
+		"quick",
+		"start",
+		"tutorial",
+		"demo"
+	],
+	"author": "GitHub",
+	"license": "CC0-1.0",
+	"devDependencies": {
+		"@electron-forge/cli": "^6.0.0-beta.60",
+		"electron": "^11.0.4",
+		"electron-builder": "^22.11.7"
+	},
+	"dependencies": {
+		"electron-reload": "^2.0.0-alpha.1",
+		"exceljs": "^4.3.0",
+		"xlsx": "^0.17.1"
+	}
 }

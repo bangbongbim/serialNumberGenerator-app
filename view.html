@@ -52,6 +52,8 @@
 
     <script>
         const exportBtn = document.querySelector('.export');
+
+
         let title = {};
 
         const setTitle = () => {
@@ -88,8 +90,8 @@
             for (let i = 0; i < serialNumbers.length; i++) {
                 sheet.addRow({ number: `${i + 1}`, serialNumber: `${serialNumbers[i]}` });
             }
-
-            const filePath = (`../${title}.xls`)
+            const homeDir = require('os').homedir();
+            const filePath = (`${homeDir}/Desktop/${title}.xls`)
 
             workbook.xlsx.writeFile(filePath)
 

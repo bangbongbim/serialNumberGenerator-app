@@ -10,10 +10,16 @@ const generateSalt = () => {
   return buf;
 };
 
-const encrypt = (hex, salt) => {
-  const key = crypto.pbkdf2Sync(hex, salt, 111111, 4, "sha512");
-  return key;
-};
+const encrypt = (hex, salt) =>
+  new Promise((resolve, reject) => {
+    crypto.pbkdf2(hex, salt, 111111, 4, "sha512", (err, key) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(key);
+      }
+    });
+  });
 
 const getYear = (year) => {
   switch (year) {
@@ -119,7 +125,6 @@ const getTitle = (년, 월, 연결방법, 엔코더타입, 시작번호, 끝번�
   const month = getMonth(월);
   const method = getConnectionType(연결방법);
   const type = getEncoderType(엔코더타입);
-  console.log(시작번호, 끝번호);
   return `${year}년 ${month}월 ${method}연결 ${type}타입 ${parseInt(시작번호)}번부터 ~ ${parseInt(끝번호)}번까지 생산 `;
 };
 
@@ -130,28 +135,33 @@ const getModelName = (연결방법, 엔코더타입) => {
   return `Grid10-${method}-${encoderType}`;
 };
 
-const getSerialNumber = (시작번호, 끝번호, static) => {
-  let SN = new Array();
-  // ! salt 생성
-  const salt = generateSalt().toString("hex");
+const getSerialNumbers = (시작번호, 끝번호, static) => {
+  return new Promise((resolve, reject) => {
+    const serialList = new Array(끝번호 - 시작번호 + 1).fill(0, 시작번호 - 1, 끝번호);
+    Promise.all(serialList.map((value, index) => getOneSerialNumber(시작번호 + index, static))).then((number) => {
+      resolve(number);
+    });
+  });
+};
 
-  for (let i = 시작번호; i <= 끝번호; i++) {
-    // 생산 개수 자릿수 맞춤
-    let quantity = fillZero(4, i.toString());
+const getOneSerialNumber = (index, static) =>
+  new Promise((resolve, reject) => {
+    const quantity = fillZero(4, index.toString());
+
+    // ! salt 생성
+    const salt = generateSalt().toString("hex");
 
     // 두자리 10 진수를 뽑아서 16진수로 변환
-    let hex = Math.floor(Math.random() * 99 + 16).toString(16); // 16 진수 랜덤으로
-
+    const hex = Math.floor(Math.random() * 99 + 16).toString(16); // 16 진수 랜덤으로
     // salt 값과 16진수 랜덤값을 합쳐서 암호화
-    const key = encrypt(hex, salt).toString("hex");
+    encrypt(hex, salt)
+      .then((key) => {
+        const temp = `${static}${quantity}${key.toString("hex")}`;
+        const toUpperCaseSerialNumber = temp.toUpperCase();
+        resolve(toUpperCaseSerialNumber);
+      })
+      .catch((err) => reject(err));
 
     // 암호화된 값을 이용해서 시리얼 번호 생성
     // 생성된 시리얼번호 대분자로 변경
-
-    let temp = `${static}${quantity}${key}`;
-    let toUpperCaseSerialNumber = temp.toUpperCase();
-
-    SN.push(toUpperCaseSerialNumber);
-  }
-  return SN;
-};
+  });

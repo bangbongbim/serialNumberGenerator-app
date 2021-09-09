@@ -35,9 +35,6 @@ const generatorSerialNumber = async (formData) => {
   const { productionYear, productionMonth, connectionMethod, rotateType, startQuantity, endQuantity } = formData;
   let encryptSerialNumber = new Array();
 
-  // ! 타이틀 만들기
-  // const title = getTitle(productionYear, productionMonth, connectionMethod, rotateType, startQuantity,endQuantity);
-
   //  ! 생산년도 , 월 , 유선/무선 , 무하 / 무부하는 변하지 않으니까 정적인 변수 생성
   const static = productionYear + productionMonth + connectionMethod + rotateType;
 
@@ -46,9 +43,6 @@ const generatorSerialNumber = async (formData) => {
   const endNumber = parseInt(endQuantity);
 
   // ! 시리얼 번호 생성
-  // ! 유선, 무선 모델이름 생성
-  const modelName = getModelName(connectionMethod, rotateType);
-
   encryptSerialNumber = await getSerialNumbers(startNumber, endNumber, static);
 
   return encryptSerialNumber;

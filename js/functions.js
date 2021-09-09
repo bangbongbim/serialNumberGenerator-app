@@ -120,21 +120,6 @@ const getEncoderType = (엔코더타입) => {
   return type;
 };
 
-const getTitle = (년, 월, 연결방법, 엔코더타입, 시작번호, 끝번호) => {
-  const year = getYear(년);
-  const month = getMonth(월);
-  const method = getConnectionType(연결방법);
-  const type = getEncoderType(엔코더타입);
-  return `${year}년 ${month}월 ${method}연결 ${type}타입 ${parseInt(시작번호)}번부터 ~ ${parseInt(끝번호)}번까지 생산 `;
-};
-
-const getModelName = (연결방법, 엔코더타입) => {
-  const method = 연결방법 === "C" ? "CT" : "BT";
-  const encoderType = 엔코더타입 === "S" ? "Soft" : "Point";
-
-  return `Grid10-${method}-${encoderType}`;
-};
-
 const getSerialNumbers = (시작번호, 끝번호, static) => {
   return new Promise((resolve, reject) => {
     const serialList = new Array(끝번호 - 시작번호 + 1).fill(0, 시작번호 - 1, 끝번호);

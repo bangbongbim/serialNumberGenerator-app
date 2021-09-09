@@ -29,7 +29,9 @@
 		"electron-builder": "^22.11.7"
 	},
 	"dependencies": {
+		"electron-log": "^4.4.1",
 		"electron-reload": "^2.0.0-alpha.1",
+		"electron-updater": "^4.3.9",
 		"exceljs": "^4.3.0",
 		"xlsx": "^0.17.1"
 	}

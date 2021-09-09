@@ -62,6 +62,7 @@
             ipcRenderer.on('getFormData-reply', (event, arg) => {
                 title = `Grid10-CT ${arg.rotateType === `S` ? `소프트` : `포인트`}타입 ${date.getFullYear()}년${date.getMonth() + 1}월 ${date.getDate()}일 ${arg.startQuantity}~${arg.endQuantity} `
                 exportExcel()
+
             })
         }
 
@@ -94,7 +95,7 @@
             const filePath = (`${homeDir}/Desktop/${title}.xls`)
 
             workbook.xlsx.writeFile(filePath)
-
+            ipcRenderer.send('downloadSuccess')
         }
 
         exportBtn.addEventListener('click', (event) => {

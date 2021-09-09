@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Notification } = require("electron");
 const { ipcMain } = require("electron");
 const path = require("path");
 
@@ -60,4 +60,16 @@ ipcMain.on("setGenerateSerialNumbers", (event, arg) => {
 
 ipcMain.on("getGeneratedSerialNumbers", (event) => {
   event.sender.send("getGeneratedSerialNumbers-reply", receivedData);
+});
+
+// 다운로드 성공 알림
+const NOTIFICATION_TITLE = "성공";
+const NOTIFICATION_BODY = "다운로드 성공 바탕화면에서 확인 ㄱㄱ띠";
+
+function showNotification() {
+  new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show();
+}
+
+ipcMain.on("downloadSuccess", (event) => {
+  showNotification();
 });

@@ -35,6 +35,11 @@
     display: inline-block;
     vertical-align: top;
 }
+.stage{
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
 
 svg path,
 svg rect {

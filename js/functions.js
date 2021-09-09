@@ -158,6 +158,7 @@ const getOneSerialNumber = (index, static) =>
       .then((key) => {
         const temp = `${static}${quantity}${key.toString("hex")}`;
         const toUpperCaseSerialNumber = temp.toUpperCase();
+        document.querySelector(".stage").innerHTML = `${index}`;
         resolve(toUpperCaseSerialNumber);
       })
       .catch((err) => reject(err));

@@ -46,9 +46,10 @@ const generatorSerialNumber = async (formData) => {
   const endNumber = parseInt(endQuantity);
 
   // ! 시리얼 번호 생성
-  encryptSerialNumber = await getSerialNumbers(startNumber, endNumber, static);
   // ! 유선, 무선 모델이름 생성
   const modelName = getModelName(connectionMethod, rotateType);
+
+  encryptSerialNumber = await getSerialNumbers(startNumber, endNumber, static);
 
   return encryptSerialNumber;
 };

@@ -3,9 +3,9 @@ const { app, BrowserWindow, Notification } = require("electron");
 const { ipcMain } = require("electron");
 const path = require("path");
 
-require("electron-reload")(__dirname, {
-  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-});
+// require("electron-reload")(__dirname, {
+//   electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+// });
 
 function createWindow() {
   // Create the browser window.
@@ -20,7 +20,7 @@ function createWindow() {
 
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
